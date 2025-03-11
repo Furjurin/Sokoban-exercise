@@ -1,31 +1,82 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f8f9fa;
+}
+
+.container {
+  text-align: center;
+}
+
 .map {
-    border: 2px solid #000;
-    margin: 0 auto;
+  align-items: center;
+  display: inline-block;
+  margin: 20px auto;
+  border: 2px solid #000;
+  padding: 20px;
+  overflow: hidden;
 }
 
-.row{
-    display: flex;
-    flex-direction: row;
+.row {
+  display: flex;
+  justify-content: center;
 }
 
-.cell{
-    width: 30px;
-    height: 30px;
+.cell {
+  width: 60px;
+  height: 60px;
 }
 
-.wall{
-    background-color: aqua;
+@media (max-width: 600px) {
+  .cell {
+    width: 25px;
+    height: 25px;
+  }
 }
 
-.box{
-    background-color: tomato;
+.wall {
+  background-color: aqua;
 }
 
-.man{
-    background-color: aquamarine;
+.box {
+  background-color: tomato;
 }
 
+.man {
+  /* background-color: aquamarine; */
+  width: 60px;
+  height: 60px;
+  background-image: url("man3.png");
+  background-size: cover;
+  background-position: center;
+}
 
 .target {
-    background-color: yellow;
+  background-color: yellow;
+}
+.scoreboard {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #222;
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.time {
+  font-weight: bold;
+}
+
+.lvl {
+  font-weight: bold;
+}
+
+.score {
+  font-weight: bold;
 }

@@ -1,44 +1,83 @@
 const map = [
-    [0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0],
-    [0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0],
-    [0,0,0,1,0,2,2,1,1,1,1,0,0,0,0,0],
-    [0,0,0,1,0,0,2,0,2,0,1,0,0,0,0,0],
-    [0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0],
-    [1,1,1,1,0,0,1,1,2,0,1,1,1,1,1,1],
-    [1,0,0,0,0,0,1,1,0,0,0,0,0,3,3,1],
-    [1,1,0,0,4,2,0,0,0,0,0,0,0,3,3,1],
-    [0,1,1,1,1,1,1,1,1,1,1,0,0,3,3,1],
-    [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1],
+  [0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 1, 0, 2, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 1, 0, 0, 2, 0, 2, 0, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 0, 0, 1, 1, 2, 0, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 3, 3, 1],
+  [1, 1, 0, 0, 4, 2, 0, 0, 0, 0, 0, 0, 0, 3, 3, 1],
+  [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 3, 3, 1],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1],
 ];
-const mapContainer = document.querySelector('.map');
+const gameArea = document.querySelector(".map");
+function drawMap() {
+  gameArea.innerHTML = "";
+  for (let x = 0; x < map.length; x++) {
+    const row = document.createElement("div");
+    row.className = "row";
+    for (let y = 0; y < map[x].length; y++) {
+      const cell = document.createElement("div");
+      cell.className = "cell";
 
-function createMap() {
-    console.log("Создание карты...");
-    map.forEach(row => {
-        const rowElement = document.createElement('div'); // Создаём строку
-        rowElement.classList.add('row');
+      switch (map[x][y]) {
+        case 1:
+          cell.classList.add("wall");
+          break;
+        case 2:
+          cell.classList.add("box");
+          break;
+        case 3:
+          cell.classList.add("target");
+          break;
+        case 4:
+          cell.classList.add("man");
+          break;
+      }
+      row.append(cell);
+    }
+    gameArea.append(row);
+  }
+}
+drawMap();
 
-        row.forEach(cell => {
-            const cellElement = document.createElement('div'); // Создаём клетку
-            cellElement.classList.add('cell');
+let manX = 7;
+let manY = 4;
 
-            // Добавляем классы в зависимости от значения клетки
-            if (cell === 1) {
-                cellElement.classList.add('wall'); // Стена
-            } else if (cell === 2) {
-                cellElement.classList.add('box'); // Ящик
-            } else if (cell === 3) {
-                cellElement.classList.add('target'); // Целевая точка
-            } else if (cell === 4) {
-                cellElement.classList.add('man'); // Персонаж
-            }
+function moveMan(dx, dy) {
+  let newX = manX + dx;
+  let newY = manY + dy;
 
-            rowElement.appendChild(cellElement); // Добавляем клетку в строку
-        });
+  if (map[newX][newY] === 1) {
+    return;
+  }
 
-        mapContainer.appendChild(rowElement); // Добавляем строку в карту
-    });
+  map[manX][manY] = 0;
+  manX = newX;
+  manY = newY;
+  map[manX][manY] = 4;
+
+  drawMap();
 }
 
-// Запускаем создание карты
-createMap();
+document.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowUp" || event.key === "w" || event.key === "ц")
+    moveMan(-1, 0);
+  if (event.key === "ArrowDown" || event.key === "s" || event.key === "ы")
+    moveMan(1, 0);
+  if (event.key === "ArrowLeft" || event.key === "a" || event.key === "ф")
+    moveMan(0, -1);
+  if (event.key === "ArrowRight" || event.key === "d" || event.key === "в")
+    moveMan(0, 1);
+});
+
+let time = 0;
+
+function updateUI() {
+  document.getElementById("time").textContent = time;
+}
+
+// setInterval(() => {
+//   time++;
+//   updateUI();
+// }, 1000);
