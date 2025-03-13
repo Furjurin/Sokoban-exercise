@@ -48,18 +48,46 @@ function moveMan(dx, dy) {
   let newX = manX + dx;
   let newY = manY + dy;
 
+  //Движение чела
   if (map[newX][newY] === 1) {
     return;
+  } else if (map[newX][newY] === 2) {
+    let boxNewX = newX + dx;
+    let boxNewY = newY + dy;
+    //Движение коробки
+    if (map[boxNewX][boxNewY] === 1) {
+      return;
+    } else if (map[boxNewX][boxNewY] === 0) {
+      map[manX][manY] = 0;
+      manX = newX;
+      manY = newY;
+      map[manX][manY] = 4;
+      map[boxNewX][boxNewY] = 2;
+    } else if (map[newX][newY] === 3) {
+      map[manX][manY] = 3;
+      manX = newX;
+      manY = newY;
+      map[manX][manY] = 4;
+    }
+  } else if (map[newX][newY] === 0) {
+    map[manX][manY] = 0;
+    manX = newX;
+    manY = newY;
+    map[manX][manY] = 4;
+  } else if (map[newX][newY] === 3) {
+    // let oldX = manX - dx;
+    // let oldY = manY - dy;
+    // let nextX = newX;
+    // let nextY = newY;
+    // map[manX][manY] = map[oldX][oldY] === 3 ? 3 : 0;
+    // manX = newX;
+    // manY = newY;
+    // map[manX][manY] = 4;
   }
-
-  map[manX][manY] = 0;
-  manX = newX;
-  manY = newY;
-  map[manX][manY] = 4;
 
   drawMap();
 }
-
+// Сделать, чтобы работало с капслоком!!!
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" || event.key === "w" || event.key === "ц")
     moveMan(-1, 0);
