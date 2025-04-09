@@ -1,40 +1,16 @@
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  background-color: #f8f9fa;
-}
-
-.container {
-  text-align: center;
-}
-
 .map {
-  align-items: center;
-  display: inline-block;
-  margin: 20px auto;
   border: 2px solid #000;
-  padding: 20px;
-  overflow: hidden;
+  margin: 0 auto;
 }
 
 .row {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
 }
 
 .cell {
-  width: 60px;
-  height: 60px;
-}
-
-@media (max-width: 600px) {
-  .cell {
-    width: 25px;
-    height: 25px;
-  }
+  width: 30px;
+  height: 30px;
 }
 
 .wall {
@@ -46,9 +22,8 @@ body {
 }
 
 .man {
-  /* background-color: aquamarine; */
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
   background-image: url("man.png");
   background-size: cover;
   background-position: center;
@@ -56,27 +31,4 @@ body {
 
 .target {
   background-color: yellow;
-}
-.scoreboard {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: #222;
-  color: white;
-  font-size: 20px;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.time {
-  font-weight: bold;
-}
-
-.lvl {
-  font-weight: bold;
-}
-
-.score {
-  font-weight: bold;
 }
